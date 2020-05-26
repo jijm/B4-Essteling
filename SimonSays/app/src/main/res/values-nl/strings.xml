@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Schitterende Smaragden</string>
+    <string name="end_result_label">Goed gespeeld!</string>
+    <string name="score_show_label">"Score: "</string>
+    <string name="your_score">"Jou score: "</string>
+</resources>
