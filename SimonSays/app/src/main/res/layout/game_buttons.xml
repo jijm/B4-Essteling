@@ -14,7 +14,7 @@
         android:layout_marginEnd="48dp"
 
         android:layout_marginBottom="32dp"
-        android:backgroundTint="@color/colorPrimary"
+        android:backgroundTint="@color/colorRed"
         app:layout_constraintBottom_toTopOf="@+id/greenButton"
         app:layout_constraintEnd_toStartOf="@+id/yellowButton"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,7 +26,7 @@
         android:layout_height="0dp"
         android:layout_marginBottom="32dp"
 
-        android:backgroundTint="@color/colorAccent"
+        android:backgroundTint="@color/colorYellow"
         app:layout_constraintBottom_toTopOf="@+id/blueButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/redButton"
@@ -38,7 +38,7 @@
         android:layout_height="0dp"
         android:layout_marginEnd="48dp"
 
-        android:backgroundTint="@color/colorAccent"
+        android:backgroundTint="@color/colorGreen"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/blueButton"
         app:layout_constraintStart_toStartOf="parent"
@@ -48,7 +48,7 @@
         android:id="@+id/blueButton"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:backgroundTint="@color/colorSecondary"
+        android:backgroundTint="@color/colorBlue"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
