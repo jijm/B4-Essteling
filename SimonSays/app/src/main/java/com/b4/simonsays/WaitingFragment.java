@@ -30,7 +30,7 @@ public class WaitingFragment extends Fragment {
 //        view.findViewById(R.id.button_second).setOnClickListener(view1 -> NavHostFragment.findNavController(WaitingFragment.this)
 //                .navigate(R.id.action_SecondFragment_to_FirstFragment));
 
-        RotateAnimation anim = new RotateAnimation(0f, 350f, 0f, 0f);
+        RotateAnimation anim = new RotateAnimation(0f, 350f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF,  0.5f);
         anim.setInterpolator(new LinearInterpolator());
         anim.setRepeatCount(Animation.INFINITE);
         anim.setDuration(700);
