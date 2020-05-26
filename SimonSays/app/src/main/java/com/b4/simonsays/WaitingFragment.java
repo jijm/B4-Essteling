@@ -27,16 +27,12 @@ public class WaitingFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-//        view.findViewById(R.id.button_second).setOnClickListener(view1 -> NavHostFragment.findNavController(WaitingFragment.this)
-//                .navigate(R.id.action_SecondFragment_to_FirstFragment));
+        RotateAnimation rotateAnimation = new RotateAnimation(0f, 350f, 0f, 0f);
+        rotateAnimation.setInterpolator(new LinearInterpolator());
+        rotateAnimation.setRepeatCount(Animation.INFINITE);
+        rotateAnimation.setDuration(700);
 
-        RotateAnimation anim = new RotateAnimation(0f, 350f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF,  0.5f);
-        anim.setInterpolator(new LinearInterpolator());
-        anim.setRepeatCount(Animation.INFINITE);
-        anim.setDuration(700);
-
-// Start animating the image
-        final ImageView splash = (ImageView) view.findViewById(R.id.iv_waiting);
-        splash.startAnimation(anim);
+        final ImageView loadingImageView = (ImageView) view.findViewById(R.id.iv_waiting);
+        splash.startAnimation(rotateAnimation);
     }
 }
