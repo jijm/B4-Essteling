@@ -17,9 +17,9 @@
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
-        android:name="com.b4.simonsays.SecondFragment"
+        android:name="com.b4.simonsays.WaitingFragment"
         android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
+        tools:layout="@layout/fragment_waiting">
 
         <action
             android:id="@+id/action_SecondFragment_to_FirstFragment"
