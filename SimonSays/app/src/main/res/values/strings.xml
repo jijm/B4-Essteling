@@ -12,4 +12,5 @@
     <string name="your_score">"Your score: "</string>
     <string name="score_show_label">Score: </string>
     <string name="end_result_label">Well played!</string>
+    <string name="waiting">Waiting for the game...</string>
 </resources>
