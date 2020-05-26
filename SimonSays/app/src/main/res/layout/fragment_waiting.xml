@@ -4,49 +4,46 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".WaitingFragment"
     android:theme="@style/AppTheme.GameView"
-    >
+    tools:context=".WaitingFragment">
 
     <TextView
         android:id="@+id/tv_waiting"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/waiting"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="128dp"
+        android:text="@string/waiting"
         android:textSize="32sp"
-        android:theme="@style/AppTheme.TextView"
-        />
+        android:theme="@style/AppTheme.TextView" />
 
     <ImageView
         android:id="@+id/iv_waiting"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:layout_below="@id/tv_waiting"
-        android:src="@drawable/ic_load_red_72dp"
-        android:theme="@style/AppTheme.Button"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="64dp"
-        />
+        android:src="@drawable/ic_load_red_72dp"
+        android:theme="@style/AppTheme.Button"/>
 
-<!--    <TextView-->
-<!--        android:id="@+id/textview_second"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        app:layout_constraintBottom_toTopOf="@id/button_second"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent" />-->
+    <!--    <TextView-->
+    <!--        android:id="@+id/textview_second"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        app:layout_constraintBottom_toTopOf="@id/button_second"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent" />-->
 
-<!--    <Button-->
-<!--        android:id="@+id/button_second"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="@string/previous"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@id/textview_second" />-->
+    <!--    <Button-->
+    <!--        android:id="@+id/button_second"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:text="@string/previous"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@id/textview_second" />-->
 </RelativeLayout>

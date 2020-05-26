@@ -3,26 +3,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
+    app:startDestination="@id/StartFragment">
 
     <fragment
-        android:id="@+id/FirstFragment"
+        android:id="@+id/StartFragment"
         android:name="com.b4.simonsays.StartFragment"
         android:label="@string/first_fragment_label"
         tools:layout="@layout/fragment_start">
 
         <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
+            android:id="@+id/action_StartFragment_to_WaitingFragment"
+            app:destination="@id/WaitingFragment" />
     </fragment>
     <fragment
-        android:id="@+id/SecondFragment"
+        android:id="@+id/WaitingFragment"
         android:name="com.b4.simonsays.WaitingFragment"
         android:label="@string/second_fragment_label"
         tools:layout="@layout/fragment_waiting">
-
-        <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
     </fragment>
 </navigation>
