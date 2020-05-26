@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#ac1a2f</color>
-    <color name="colorSecondary">#44687d</color>
-    <color name="colorAccent">#f2cb65</color>
+    <color name="colorRed">#ad182d</color>
 
+    <color name="colorBlue">#44687d</color>
+
+    <color name="colorGreen">#70a489</color>
+    <color name="colorGreenDark">#307953</color>
+
+    <color name="colorYellow">#f2cb65</color>
+
+    <color name="white_overlay">#f8f5ea</color>
     <color name="black_overlay">#66000000</color>
 </resources>
