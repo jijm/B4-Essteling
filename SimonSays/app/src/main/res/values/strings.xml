@@ -13,4 +13,6 @@
     <string name="score_show_label">Score: </string>
     <string name="end_result_label">Well played!</string>
     <string name="waiting">Waiting for the game...</string>
+    <string name="first_part_name">Shining</string>
+    <string name="second_part_name">Sapphire</string>
 </resources>

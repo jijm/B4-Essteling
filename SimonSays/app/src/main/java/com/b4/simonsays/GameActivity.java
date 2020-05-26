@@ -49,4 +49,5 @@ public class GameActivity extends AppCompatActivity {
         // TODO: 26/05/2020 Send message to MQTT: blue button was pressed
         Toast.makeText(this, "Blue button was pressed", Toast.LENGTH_LONG).show();
     }
+
 }

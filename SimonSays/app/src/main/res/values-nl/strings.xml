@@ -4,4 +4,7 @@
     <string name="end_result_label">Goed gespeeld!</string>
     <string name="score_show_label">"Score: "</string>
     <string name="your_score">"Jou score: "</string>
+    <string name="waiting">Wachten op het spel...</string>
+    <string name="first_part_name">Schitterende</string>
+    <string name="second_part_name">Smaragden</string>
 </resources>
