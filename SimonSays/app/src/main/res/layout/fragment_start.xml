@@ -10,25 +10,26 @@
         android:id="@+id/textview_first"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/first_part_name"
-        android:textStyle="bold"
-        android:textSize="70sp"
-        android:textColor="@color/colorBlue"
-
         android:rotation="-4"
+        android:text="@string/first_part_name"
+        android:textColor="@color/colorBlue"
+        android:textSize="70sp"
+
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/scan_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/second_part_name"
-        android:textStyle="italic"
-        android:textSize="35sp"
-        android:textColor="@color/colorRed"
         android:rotation="-3"
+        android:text="@string/second_part_name"
+        android:textColor="@color/colorRed"
+        android:textSize="35sp"
+        android:textStyle="italic"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textview_first" />
@@ -37,29 +38,29 @@
         android:layout_width="wrap_content"
         android:layout_height="200dp"
         android:src="@drawable/essteling"
-        app:layout_constraintTop_toBottomOf="@+id/textview"
         app:layout_constraintBottom_toTopOf="@id/qrcode"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textview" />
 
     <ImageView
+        android:id="@+id/qrcode"
         android:layout_width="120dp"
         android:layout_height="120dp"
         android:src="@drawable/qr"
         app:layout_constraintBottom_toTopOf="@+id/scan_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:id="@+id/qrcode"
-        />
+        app:layout_constraintStart_toStartOf="parent" />
+    
     <Button
         android:id="@+id/scan_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="scan qr-code"
-        android:textColor="@color/white_overlay"
-        android:backgroundTint="@color/colorRed"
-
         android:layout_marginTop="500dp"
+        android:backgroundTint="@color/colorRed"
+        android:text="scan qr-code"
+
+        android:textColor="@color/white_overlay"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
