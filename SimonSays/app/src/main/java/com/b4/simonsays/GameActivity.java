@@ -25,6 +25,7 @@ public class GameActivity extends AppCompatActivity implements MessageListener {
         SHOWING_SEQUENCE,
         WON,
         WAITING_FOR_INPUT,
+        WAITING_FOR_RESPONSE,
         WAITING_FOR_SEQUENCE
     }
 
@@ -52,8 +53,10 @@ public class GameActivity extends AppCompatActivity implements MessageListener {
     }
 
     private void buttonPressed(String message) {
-        if (gameState.equals(GameStates.WAITING_FOR_INPUT))
-            mqttManager.publishToTopic(MqttSettings.getFullAppTopic(), message);
+        if (gameState.equals(GameStates.WAITING_FOR_INPUT)){
+            this.mqttManager.publishToTopic(MqttSettings.getFullAppTopic(), message);
+            this.gameState = GameStates.WAITING_FOR_RESPONSE;
+        }
     }
 
     @Override
@@ -72,6 +75,7 @@ public class GameActivity extends AppCompatActivity implements MessageListener {
             case MqttSettings.CORRECT_MESSAGE:
                 // TODO: 28/05/2020 Handle correct message
                 Toast.makeText(this, "Correct!", Toast.LENGTH_SHORT).show();
+                gameState = GameStates.WAITING_FOR_INPUT;
                 break;
 
             case MqttSettings.WRONG_MESSAGE:
