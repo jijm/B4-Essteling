@@ -149,28 +149,36 @@ if(isConnected){
           //The answer is correct and is the last sequence
           state = STATE_ENDGAME;
           wonGame = true;
+          //CORRECT
         }
         else{
           //The answer is correct and a new sequence will play
         currentIndex = 0;
         state = STATE_WAITFORBUTTON;
+        //CORRECT
         }
       }
       else{
         //The answer is correct and the sequence is not finished
         currentIndex += 1;
         state = STATE_WAITFORANDROID;
+        //CORRECT
       }
     }
     else{
       //The answer is incorrect and the game ends
       state = STATE_ENDGAME;
+      //WRONG
       }
   }
 
   if(state == STATE_ENDGAME){
-    //send wonGame
-    //send sequenceSize?
+    if(wonGame){
+      //send WON
+    }
+    else{
+      //send LOST
+    }
     Reset();
   }
 
@@ -219,6 +227,6 @@ void addToSequence(int button){
     for(int i = 0; i <= maxSequenceSize; i++){
       sequence[i] = -1;
     }
-   }
+  }
 
   
