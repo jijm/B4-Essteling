@@ -27,12 +27,12 @@ public class WaitingFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        RotateAnimation rotateAnimation = new RotateAnimation(0f, 350f, 0f, 0f);
+        RotateAnimation rotateAnimation = new RotateAnimation(0f, 350f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
         rotateAnimation.setInterpolator(new LinearInterpolator());
         rotateAnimation.setRepeatCount(Animation.INFINITE);
         rotateAnimation.setDuration(700);
 
         final ImageView loadingImageView = (ImageView) view.findViewById(R.id.iv_waiting);
-        splash.startAnimation(rotateAnimation);
+        loadingImageView.startAnimation(rotateAnimation);
     }
 }
