@@ -1,5 +1,6 @@
 package com.b4.simonsays;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,13 +14,21 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
-public class WaitingFragment extends Fragment {
+import com.b4.simonsays.mqtt.MessageListener;
+import com.b4.simonsays.mqtt.MqttManager;
+import com.b4.simonsays.mqtt.MqttSettings;
+
+import org.eclipse.paho.client.mqttv3.MqttMessage;
+
+public class WaitingFragment extends Fragment implements MessageListener {
 
     @Override
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
     ) {
+        MqttManager.getInstance().setMessageListener(this);
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_waiting, container, false);
     }
@@ -34,5 +43,14 @@ public class WaitingFragment extends Fragment {
 
         final ImageView loadingImageView = view.findViewById(R.id.iv_waiting);
         loadingImageView.startAnimation(rotateAnimation);
+    }
+
+    @Override
+    public void onMessageArrived(String topic, MqttMessage message) {
+        switch (message.toString()){
+            case "START":
+                Intent intent = new Intent(getContext(), GameActivity.class);
+                startActivity(intent);
+        }
     }
 }
