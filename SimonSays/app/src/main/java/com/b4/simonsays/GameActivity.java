@@ -64,13 +64,11 @@ public class GameActivity extends AppCompatActivity implements MessageListener {
     @Override
     public void onMessageArrived(String topic, MqttMessage message) {
 
-        String messageString = Arrays.toString(message.getPayload());
-
-        switch (messageString) {
+        switch (message.toString()) {
             case MqttSettings.SHOWING_SEQUENCE_MESSAGE:
             case MqttSettings.WAITING_FOR_INPUT_MESSAGE:
             case MqttSettings.WAITING_FOR_SEQUENCE_MESSAGE:
-                gameState = GameStates.valueOf(messageString);
+                gameState = GameStates.valueOf(message.toString());
                 break;
 
             case MqttSettings.CORRECT_MESSAGE:

@@ -8,11 +8,6 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
-
-import com.google.zxing.Result;
-
-import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
 public class StartFragment extends Fragment {
 
@@ -26,8 +21,9 @@ public class StartFragment extends Fragment {
 
         super.onViewCreated(view, savedInstanceState);
 
-        view.findViewById(R.id.scan_button).setOnClickListener(view1 ->
-                Intent intent = new Intent(getActivity().getApplication(), ScannerActivity.class);
-                startActivity(intent);
+        view.findViewById(R.id.scan_button).setOnClickListener(view1 -> {
+            Intent intent = new Intent(getContext(), ScannerActivity.class);
+            startActivity(intent);
+        });
     }
 }

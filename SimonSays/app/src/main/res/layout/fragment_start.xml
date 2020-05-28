@@ -61,9 +61,7 @@
         android:text="scan qr-code"
 
         android:textColor="@color/white_overlay"
-        android:backgroundTint="@color/colorRed"
 
-        android:layout_marginTop="450dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

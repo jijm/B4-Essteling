@@ -1,17 +1,13 @@
 package com.b4.simonsays;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.FragmentManager;
-import androidx.navigation.fragment.NavHostFragment;
-
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.google.zxing.Result;
 
@@ -30,38 +26,32 @@ public class ScannerActivity extends AppCompatActivity implements ZXingScannerVi
         scannerView = new ZXingScannerView(this);
         setContentView(scannerView);
 
-        if(checkPermission()){
-            //Toast.makeText(ScannerActivity.this, "ok",Toast.LENGTH_LONG).show();
-
-        }else{
+        if (!checkPermission()) {
             requestPermission();
         }
-
-
     }
+
     //checks if ScannerAcivity has permission to use camera
-    public boolean checkPermission(){
+    public boolean checkPermission() {
         return (ContextCompat.checkSelfPermission(ScannerActivity.this, CAMERA) == PackageManager.PERMISSION_GRANTED);
     }
 
-    private void requestPermission(){
-        ActivityCompat.requestPermissions(this,new String[]{CAMERA}, requestCamera);
+    private void requestPermission() {
+        ActivityCompat.requestPermissions(this, new String[]{CAMERA}, requestCamera);
     }
 
-    public void onRequestPermissionResult(int requestCode, String permission[], int grantResults[]) {
+    public void onRequestPermissionResult(int requestCode, String[] permission, int[] grantResults) {
         if (requestCode == requestCamera) {
             if (grantResults.length > 0) {
                 boolean cameraAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
-                if (cameraAccepted) {
-                }else{
-                    if(shouldShowRequestPermissionRationale(CAMERA)){
-                                new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        requestPermissions(new String[]{CAMERA}, requestCamera);
-                                    }
-                                };
-
+                if (!cameraAccepted) {
+                    if (shouldShowRequestPermissionRationale(CAMERA)) {
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                requestPermissions(new String[]{CAMERA}, requestCamera);
+                            }
+                        };
                     }
                 }
             }
@@ -70,14 +60,14 @@ public class ScannerActivity extends AppCompatActivity implements ZXingScannerVi
 
     //checks if there is a cscannerview, if not it creates one
     @Override
-    public void onResume(){
+    public void onResume() {
         super.onResume();
-        if(checkPermission())
-        {
-            if(scannerView == null){
+        if (checkPermission()) {
+            if (scannerView == null) {
                 scannerView = new ZXingScannerView(this);
                 setContentView(scannerView);
             }
+
             scannerView.setResultHandler(this);
             scannerView.startCamera();
         }
@@ -85,7 +75,7 @@ public class ScannerActivity extends AppCompatActivity implements ZXingScannerVi
 
     //stops the camera
     @Override
-    public void onDestroy(){
+    public void onDestroy() {
         super.onDestroy();
         scannerView.stopCamera();
     }
@@ -99,14 +89,10 @@ public class ScannerActivity extends AppCompatActivity implements ZXingScannerVi
         acceptCamera.show();
     }*/
 
-
     @Override
     public void handleResult(Result result) {
-        if(result.getText().equals("Shining Saphires")) {
+        if (result.getText().equals("Shining Saphires")) {
             Toast.makeText(getApplicationContext(), result.getText(), Toast.LENGTH_SHORT).show();
         }
-
-
-
     }
 }
