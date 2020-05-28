@@ -3,17 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:theme="@style/AppTheme.GameView"
-    tools:context=".EndFragment"
-    tools:showIn=".MainActivity">
+    tools:showIn=".MainActivity"
+    android:padding="16dp" >
 
     <TextView
         android:id="@+id/tv_correctness"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="128dp"
         android:text="@string/end_result_label"
         android:textSize="30sp"
         android:theme="@style/AppTheme.TextView" />
@@ -23,7 +22,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_correctness"
         android:layout_centerHorizontal="true"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:id="@+id/score_holder">
 
         <TextView
             android:id="@+id/tv_score_label"
@@ -46,13 +46,12 @@
         android:id="@+id/button_confirm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="128dp"
+        android:layout_marginTop="32dp"
+        android:layout_below="@id/score_holder"
+        android:theme="@style/AppTheme.Button"
         app:fabCustomSize="64dp"
         app:maxImageSize="48dp"
-        app:srcCompat="@drawable/ic_check_white_48dp"
-        android:theme="@style/AppTheme.Button"
-        />
+        app:srcCompat="@drawable/ic_check_white_48dp" />
 
 </RelativeLayout>

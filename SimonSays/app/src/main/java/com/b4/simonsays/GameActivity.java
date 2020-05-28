@@ -1,9 +1,12 @@
 package com.b4.simonsays;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.b4.simonsays.mqtt.MessageListener;
@@ -50,6 +53,8 @@ public class GameActivity extends AppCompatActivity implements MessageListener {
 
         mqttManager = MqttManager.getInstance();
         mqttManager.setMessageListener(this);
+
+        showEndDialog();
     }
 
     private void buttonPressed(String message) {
@@ -81,7 +86,23 @@ public class GameActivity extends AppCompatActivity implements MessageListener {
             case MqttSettings.WRONG_MESSAGE:
                 // TODO: 28/05/2020 Handle wrong message
                 Toast.makeText(this, "Wrong!", Toast.LENGTH_SHORT).show();
+                showEndDialog();
                 break;
         }
+    }
+
+    private void showEndDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setCancelable(false);
+        View view = View.inflate(this, R.layout.dialog_game_end, null);
+        builder.setView(view);
+
+        view.findViewById(R.id.button_confirm).setOnClickListener(v -> {
+          Intent intent = new Intent(this, MainActivity.class);
+          startActivity(intent);
+        });
+
+        builder.create().show();
+
     }
 }
