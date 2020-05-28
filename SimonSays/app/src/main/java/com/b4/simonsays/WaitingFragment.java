@@ -32,7 +32,7 @@ public class WaitingFragment extends Fragment {
         rotateAnimation.setRepeatCount(Animation.INFINITE);
         rotateAnimation.setDuration(700);
 
-        final ImageView loadingImageView = (ImageView) view.findViewById(R.id.iv_waiting);
+        final ImageView loadingImageView = view.findViewById(R.id.iv_waiting);
         loadingImageView.startAnimation(rotateAnimation);
     }
 }
