@@ -53,5 +53,4 @@
         app:fabCustomSize="64dp"
         app:maxImageSize="48dp"
         app:srcCompat="@drawable/ic_check_white_48dp" />
-
 </RelativeLayout>
