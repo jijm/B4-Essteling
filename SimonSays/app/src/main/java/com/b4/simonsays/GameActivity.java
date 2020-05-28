@@ -21,6 +21,7 @@ public class GameActivity extends AppCompatActivity implements MessageListener {
     private MqttManager mqttManager;
 
     private enum GameStates {
+        START,
         SHOWING_SEQUENCE,
         WON,
         WAITING_FOR_INPUT,
@@ -44,13 +45,15 @@ public class GameActivity extends AppCompatActivity implements MessageListener {
         greenButton.setOnClickListener(e -> buttonPressed(MqttSettings.GREEN_BUTTON_PRESSED_MESSAGE));
         blueButton.setOnClickListener(e -> buttonPressed(MqttSettings.BLUE_BUTTON_PRESSED_MESSAGE));
 
+        gameState = GameStates.START;
+
         mqttManager = MqttManager.getInstance();
         mqttManager.setMessageListener(this);
     }
 
     private void buttonPressed(String message) {
         if (gameState.equals(GameStates.WAITING_FOR_INPUT))
-            mqttManager.publishToTopic(MqttSettings.getFullAppTopic(), message, null);
+            mqttManager.publishToTopic(MqttSettings.getFullAppTopic(), message);
     }
 
     @Override
@@ -76,7 +79,5 @@ public class GameActivity extends AppCompatActivity implements MessageListener {
                 Toast.makeText(this, "Wrong!", Toast.LENGTH_SHORT).show();
                 break;
         }
-
-        System.out.println(message.toString());
     }
 }
