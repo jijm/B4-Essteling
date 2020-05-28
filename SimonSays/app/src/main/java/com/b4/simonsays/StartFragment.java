@@ -23,13 +23,8 @@ public class StartFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        view.findViewById(R.id.scan_button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        view.findViewById(R.id.scan_button).setOnClickListener(view1 ->
                 NavHostFragment.findNavController(StartFragment.this)
-                        .navigate(R.id.action_StartFragment_to_WaitingFragment);
-            }
-        });
-
+                .navigate(R.id.action_StartFragment_to_WaitingFragment));
     }
 }
