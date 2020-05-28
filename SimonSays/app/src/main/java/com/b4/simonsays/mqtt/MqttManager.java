@@ -3,6 +3,8 @@ package com.b4.simonsays.mqtt;
 import android.content.Context;
 import android.util.Log;
 
+import androidx.annotation.Nullable;
+
 import org.eclipse.paho.android.service.MqttAndroidClient;
 import org.eclipse.paho.client.mqttv3.IMqttActionListener;
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
@@ -21,8 +23,6 @@ public class MqttManager {
 
     private static MqttManager instance;
 
-    private MqttSettings mqttSettings;
-
     private MqttAndroidClient client;
 
     public static MqttManager getInstance() {
@@ -34,21 +34,17 @@ public class MqttManager {
     }
 
     private MqttManager() {
-        this.mqttSettings = new MqttSettings();
     }
 
     public void connect(Context context) {
         String clientID = MqttClient.generateClientId();
 
-        client = new MqttAndroidClient(context, mqttSettings.getFullServerAddress(), clientID);
+        client = new MqttAndroidClient(context, MqttSettings.getFullServerAddress(), clientID);
         client.setCallback(new MqttCallBackHandler());
         MqttConnectOptions connectOptions = new MqttConnectOptions();
 
-        if (!mqttSettings.getUsername().isEmpty())
-            connectOptions.setUserName(mqttSettings.getUsername());
-
-        if (!mqttSettings.getPassword().isEmpty())
-            connectOptions.setPassword(mqttSettings.getPassword().toCharArray());
+        connectOptions.setUserName(MqttSettings.USERNAME);
+        connectOptions.setPassword(MqttSettings.PASSWORD.toCharArray());
 
         try {
             Log.d(LOG_TAG, "Connecting to MQTT server...");
@@ -61,29 +57,6 @@ public class MqttManager {
         }
     }
 
-    public void subscribeToTopic(String topic, IMqttActionListener iMqttActionListener) {
-        try {
-            Log.d(LOG_TAG, String.format("Subscribing to topic \"%s\"...", topic));
-            IMqttToken token = client.subscribe(String.format("%s/%s", mqttSettings.getBaseTopic(), topic), mqttSettings.getQos());
-            token.setActionCallback(iMqttActionListener);
-        } catch (MqttException e) {
-            Log.e(LOG_TAG, String.format("Failed subscribing to topic \"%s\" due to: %s", topic, e.getMessage()));
-        }
-    }
-
-    public void publishToTopic(String topic, String message, MqttCallback mqttCallback) {
-        MqttMessage newMessage = new MqttMessage(message.getBytes(StandardCharsets.UTF_8));
-
-        try {
-            Log.i(LOG_TAG, String.format("Publishing message \"%s\" to topic \"%s\"", message, topic));
-            client.publish(topic, newMessage);
-            client.setCallback(mqttCallback);
-
-        } catch (MqttException e) {
-            Log.e(LOG_TAG, String.format("Failed publishing message \"%s\" to topic \"%s\" due to: %s", message, topic, e.getMessage()));
-        }
-    }
-
     public void disconnect() {
         if (!isConnected()) return;
 
@@ -91,6 +64,31 @@ public class MqttManager {
             client.disconnect();
         } catch (MqttException e) {
             e.printStackTrace();
+        }
+    }
+
+    public void subscribeToTopic(String topic, IMqttActionListener iMqttActionListener) {
+        try {
+            Log.d(LOG_TAG, String.format("Subscribing to topic \"%s\"...", topic));
+            IMqttToken token = client.subscribe(String.format("%s/%s", MqttSettings.BASE_TOPIC, topic), MqttSettings.QOS);
+            token.setActionCallback(iMqttActionListener);
+        } catch (MqttException e) {
+            Log.e(LOG_TAG, String.format("Failed subscribing to topic \"%s\" due to: %s", topic, e.getMessage()));
+        }
+    }
+
+    public void publishToTopic(String topic, String message, @Nullable MqttCallback mqttCallback) {
+        MqttMessage newMessage = new MqttMessage(message.getBytes(StandardCharsets.UTF_8));
+
+        try {
+            Log.i(LOG_TAG, String.format("Publishing message \"%s\" to topic \"%s\"", message, topic));
+            client.publish(topic, newMessage);
+
+            if (mqttCallback != null)
+                client.setCallback(mqttCallback);
+
+        } catch (MqttException e) {
+            Log.e(LOG_TAG, String.format("Failed publishing message \"%s\" to topic \"%s\" due to: %s", message, topic, e.getMessage()));
         }
     }
 
@@ -124,7 +122,7 @@ public class MqttManager {
         }
 
         @Override
-        public void messageArrived(String topic, MqttMessage message) throws Exception {
+        public void messageArrived(String topic, MqttMessage message) {
             Log.d(LOG_TAG, String.format("Message (\"%s\" arrived on topic \"%s\"", topic, message.toString()));
         }
 
