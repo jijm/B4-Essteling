@@ -81,15 +81,12 @@ public class MqttManager {
         }
     }
 
-    public void publishToTopic(String topic, String message, @Nullable MqttCallback mqttCallback) {
+    public void publishToTopic(String topic, String message) {
         MqttMessage newMessage = new MqttMessage(message.getBytes(StandardCharsets.UTF_8));
 
         try {
             Log.i(LOG_TAG, String.format("Publishing message \"%s\" to topic \"%s\"", message, topic));
             client.publish(topic, newMessage);
-
-            if (mqttCallback != null)
-                client.setCallback(mqttCallback);
 
         } catch (MqttException e) {
             Log.e(LOG_TAG, String.format("Failed publishing message \"%s\" to topic \"%s\" due to: %s", message, topic, e.getMessage()));
