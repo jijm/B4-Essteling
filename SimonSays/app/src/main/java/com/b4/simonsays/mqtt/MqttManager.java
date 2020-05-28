@@ -5,6 +5,8 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 
+import com.b4.simonsays.GameActivity;
+
 import org.eclipse.paho.android.service.MqttAndroidClient;
 import org.eclipse.paho.client.mqttv3.IMqttActionListener;
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
@@ -25,6 +27,8 @@ public class MqttManager {
 
     private MqttAndroidClient client;
 
+    private MessageListener messageListener;
+
     public static MqttManager getInstance() {
         if (instance == null) {
             instance = new MqttManager();
@@ -33,8 +37,7 @@ public class MqttManager {
         return instance;
     }
 
-    private MqttManager() {
-    }
+    private MqttManager() {}
 
     public void connect(Context context) {
         String clientID = MqttClient.generateClientId();
@@ -67,11 +70,12 @@ public class MqttManager {
         }
     }
 
-    public void subscribeToTopic(String topic, IMqttActionListener iMqttActionListener) {
+    public void subscribeToTopic(String topic, @Nullable IMqttActionListener iMqttActionListener) {
         try {
             Log.d(LOG_TAG, String.format("Subscribing to topic \"%s\"...", topic));
-            IMqttToken token = client.subscribe(String.format("%s/%s", MqttSettings.BASE_TOPIC, topic), MqttSettings.QOS);
+            IMqttToken token = client.subscribe(topic, MqttSettings.QOS);
             token.setActionCallback(iMqttActionListener);
+
         } catch (MqttException e) {
             Log.e(LOG_TAG, String.format("Failed subscribing to topic \"%s\" due to: %s", topic, e.getMessage()));
         }
@@ -92,15 +96,21 @@ public class MqttManager {
         }
     }
 
+    public void setMessageListener(MessageListener messageListener) {
+        this.messageListener = messageListener;
+    }
+
     public boolean isConnected() {
         return client.isConnected();
     }
 
-    static class MqttConnectActionListener implements IMqttActionListener {
+    class MqttConnectActionListener implements IMqttActionListener {
 
         @Override
         public void onSuccess(IMqttToken asyncActionToken) {
             Log.d(LOG_TAG, "Successfully connected to MQTT server!");
+
+            subscribeToTopic(MqttSettings.getFullEspTopic(), new MqttSubscribeActionListener());
         }
 
         @Override
@@ -109,7 +119,22 @@ public class MqttManager {
         }
     }
 
-    static class MqttCallBackHandler implements MqttCallbackExtended {
+    class MqttSubscribeActionListener implements IMqttActionListener{
+
+        private final String LOG_TAG = this.getClass().getName();
+
+        @Override
+        public void onSuccess(IMqttToken asyncActionToken) {
+            Log.d(LOG_TAG, "Successfully subscribed to topic!");
+        }
+
+        @Override
+        public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
+            Log.e(LOG_TAG, "Failed to subscribe to topic!");
+        }
+    }
+
+    class MqttCallBackHandler implements MqttCallbackExtended {
 
         @Override
         public void connectComplete(boolean reconnect, String serverURI) {
@@ -123,7 +148,9 @@ public class MqttManager {
 
         @Override
         public void messageArrived(String topic, MqttMessage message) {
-            Log.d(LOG_TAG, String.format("Message (\"%s\" arrived on topic \"%s\"", topic, message.toString()));
+            Log.d(LOG_TAG, String.format("Message (\"%s\") arrived on topic \"%s\"", topic, message.toString()));
+
+            messageListener.onMessageArrived(topic, message);
         }
 
         @Override
