@@ -5,13 +5,10 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 
-import com.b4.simonsays.GameActivity;
-
 import org.eclipse.paho.android.service.MqttAndroidClient;
 import org.eclipse.paho.client.mqttv3.IMqttActionListener;
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.IMqttToken;
-import org.eclipse.paho.client.mqttv3.MqttCallback;
 import org.eclipse.paho.client.mqttv3.MqttCallbackExtended;
 import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
@@ -44,8 +41,9 @@ public class MqttManager {
 
         client = new MqttAndroidClient(context, MqttSettings.getFullServerAddress(), clientID);
         client.setCallback(new MqttCallBackHandler());
-        MqttConnectOptions connectOptions = new MqttConnectOptions();
 
+        MqttConnectOptions connectOptions = new MqttConnectOptions();
+        connectOptions.setWill(MqttSettings.getFullAppTopic(), MqttSettings.LEAVE_MESSAGE.getBytes(), MqttSettings.QOS, false);
         connectOptions.setUserName(MqttSettings.USERNAME);
         connectOptions.setPassword(MqttSettings.PASSWORD.toCharArray());
 
@@ -116,7 +114,7 @@ public class MqttManager {
         }
     }
 
-    class MqttSubscribeActionListener implements IMqttActionListener{
+    class MqttSubscribeActionListener implements IMqttActionListener {
 
         private final String LOG_TAG = this.getClass().getName();
 
