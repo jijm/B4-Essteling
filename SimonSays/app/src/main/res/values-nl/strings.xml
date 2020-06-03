@@ -7,4 +7,7 @@
     <string name="waiting">Wachten op het spel...</string>
     <string name="first_part_name">Schitterende</string>
     <string name="second_part_name">Smaragden</string>
+    <string name="action_help">Help</string>
+    <string name="dialog_help_title">Problemen?</string>
+    <string name="dialog_help_confirm">Oké, ik begrijp het</string>
 </resources>

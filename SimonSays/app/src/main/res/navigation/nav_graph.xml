@@ -8,7 +8,6 @@
     <fragment
         android:id="@+id/StartFragment"
         android:name="com.b4.simonsays.StartFragment"
-        android:label="@string/first_fragment_label"
         tools:layout="@layout/fragment_start">
 
         <action
@@ -18,7 +17,6 @@
     <fragment
         android:id="@+id/WaitingFragment"
         android:name="com.b4.simonsays.WaitingFragment"
-        android:label="@string/second_fragment_label"
         tools:layout="@layout/fragment_waiting">
     </fragment>
 </navigation>
