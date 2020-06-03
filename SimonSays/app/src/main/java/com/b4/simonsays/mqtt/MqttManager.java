@@ -54,7 +54,6 @@ public class MqttManager {
 
         } catch (MqttException e) {
             Log.e(LOG_TAG, String.format("Failed connecting to MQTT server due to: %s", e.getMessage()));
-            e.printStackTrace();
         }
     }
 

@@ -1,23 +1,15 @@
 <resources>
     <string name="app_name">Shining Sapphires</string>
-
-    <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label" translatable="false">First Fragment</string>
-    <string name="second_fragment_label" translatable="false">Second Fragment</string>
-    <string name="next" translatable="false">Next</string>
-    <string name="previous" translatable="false">Previous</string>
-
-    <string name="hello_first_fragment" translatable="false">Hello first fragment</string>
-    <string name="hello_second_fragment" translatable="false">Hello second fragment. Arg: %1$s</string>
-    <string name="your_score">"Your score: "</string>
-    <string name="score_show_label">Score: </string>
-    <string name="end_result_label">Well played!</string>
-    <string name="waiting">Waiting for the game...</string>
     <string name="first_part_name">Shining</string>
     <string name="second_part_name">Sapphire</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="your_score">"Your score: "</string>
+    <string name="score_show_label">Score: </string>
+    <string name="end_result_label">Well played!</string>
+    <string name="waiting">Waiting for the game…</string>
+
+    <!--  Help menu item and dialog  -->
+    <string name="action_help">Help</string>
     <string name="dialog_help_title">Having trouble?</string>
     <string name="dialog_help_message">In this app you are supposed to follow the pattern that gets displayed in the cave. Be sure to carefully remember the correct pattern to gather more points!</string>
     <string name="dialog_help_confirm">Okay, I understand now</string>
