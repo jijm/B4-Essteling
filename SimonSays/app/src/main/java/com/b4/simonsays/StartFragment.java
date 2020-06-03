@@ -33,11 +33,10 @@ public class StartFragment extends Fragment implements ZXingScannerView.ResultHa
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         scannerView = view.findViewById(R.id.scannerView);
         scannerView.setVisibility(View.GONE);
-
         view.findViewById(R.id.scan_button).setOnClickListener(view1 -> {
+
             startScannerView();
         });
     }
@@ -61,33 +60,20 @@ public class StartFragment extends Fragment implements ZXingScannerView.ResultHa
         ActivityCompat.requestPermissions(getActivity(), new String[]{CAMERA}, 3);
     }
 
-//    //checks if there is a scannerview, if not it creates one
-//    @Override
-//    public void onResume() {
-//        super.onResume();
-//        if (checkPermission()) {
-//            scannerView.setVisibility(View.VISIBLE);
-//            scannerView.setResultHandler(this);
-//            scannerView.startCamera();
-//        }
-//    }
-//
-//    //stops the camera
-//    @Override
-//    public void onDestroy() {
-//        super.onDestroy();
-//        scannerView.stopCamera();
-//    }
 
     @Override
     public void handleResult(Result result) {
         if (result.getText().equals("Shining Saphires")) {
             Toast.makeText(getContext(), result.getText(), Toast.LENGTH_SHORT).show();
+            NavHostFragment.findNavController(StartFragment.this)
+                    .navigate(R.id.action_StartFragment_to_WaitingFragment);
 
 
         } else {
             Toast.makeText(getContext(), "geen goede qr-code", Toast.LENGTH_SHORT).show();
-            onResume();
+            scannerView.setVisibility(View.VISIBLE);
+            scannerView.setResultHandler(this);
+            scannerView.startCamera();
         }
     }
 }
