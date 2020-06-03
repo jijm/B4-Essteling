@@ -10,4 +10,5 @@
     <string name="action_help">Help</string>
     <string name="dialog_help_title">Problemen?</string>
     <string name="dialog_help_confirm">Oké, ik begrijp het</string>
+    <string name="dialog_help_message">In deze app is het de bedoeling om het patroon dat getoond te worden in de grot na te bootsen. Zorg ervoor dat je goed oplet om zoveel mogelijk punten te behalen!</string>
 </resources>
