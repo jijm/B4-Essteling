@@ -1,6 +1,7 @@
 package com.b4.simonsays;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.widget.Toast;
@@ -8,6 +9,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.navigation.Navigation;
 
 import com.google.zxing.Result;
 
@@ -16,8 +18,6 @@ import me.dm7.barcodescanner.zxing.ZXingScannerView;
 import static android.Manifest.permission.CAMERA;
 
 public class ScannerActivity extends AppCompatActivity implements ZXingScannerView.ResultHandler {
-
-    private int requestCamera;
     private ZXingScannerView scannerView;
 
     @Override
@@ -33,32 +33,14 @@ public class ScannerActivity extends AppCompatActivity implements ZXingScannerVi
 
     //checks if ScannerAcivity has permission to use camera
     public boolean checkPermission() {
-        return (ContextCompat.checkSelfPermission(ScannerActivity.this, CAMERA) == PackageManager.PERMISSION_GRANTED);
+        return (ContextCompat.checkSelfPermission(this, CAMERA) == PackageManager.PERMISSION_GRANTED);
     }
 
     private void requestPermission() {
-        ActivityCompat.requestPermissions(this, new String[]{CAMERA}, requestCamera);
+        ActivityCompat.requestPermissions(this, new String[]{CAMERA}, 3);
     }
 
-    public void onRequestPermissionResult(int requestCode, String[] permission, int[] grantResults) {
-        if (requestCode == requestCamera) {
-            if (grantResults.length > 0) {
-                boolean cameraAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
-                if (!cameraAccepted) {
-                    if (shouldShowRequestPermissionRationale(CAMERA)) {
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                requestPermissions(new String[]{CAMERA}, requestCamera);
-                            }
-                        };
-                    }
-                }
-            }
-        }
-    }
-
-    //checks if there is a cscannerview, if not it creates one
+    //checks if there is a scannerview, if not it creates one
     @Override
     public void onResume() {
         super.onResume();
@@ -80,19 +62,14 @@ public class ScannerActivity extends AppCompatActivity implements ZXingScannerVi
         scannerView.stopCamera();
     }
 
-    /*public void displayAlertMessage(String message, DialogInterface.OnClickListener listener){
-        AlertDialog.Builder acceptCamera = new AlertDialog.Builder(ScannerActivity.this);
-        acceptCamera.setMessage(message);
-        acceptCamera.setPositiveButton("OK", listener);
-        acceptCamera.setNegativeButton("No", null);
-        acceptCamera.create();
-        acceptCamera.show();
-    }*/
-
     @Override
     public void handleResult(Result result) {
         if (result.getText().equals("Shining Saphires")) {
             Toast.makeText(getApplicationContext(), result.getText(), Toast.LENGTH_SHORT).show();
+
+        }else{
+            Toast.makeText(getApplicationContext(),"geen goede qr-code",Toast.LENGTH_SHORT).show();
+            onResume();
         }
     }
 }

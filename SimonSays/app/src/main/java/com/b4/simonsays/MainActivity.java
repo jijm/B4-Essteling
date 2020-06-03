@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
         // Connect to MQTT broker:
         MqttManager.getInstance().connect(this.getApplicationContext());
 
-        Intent intent = new Intent(this, GameActivity.class);
-        startActivity(intent);
+        /*Intent intent = new Intent(this, GameActivity.class);
+        startActivity(intent);*/
     }
 }
