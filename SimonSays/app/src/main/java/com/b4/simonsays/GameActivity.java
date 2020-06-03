@@ -1,6 +1,5 @@
 package com.b4.simonsays;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -17,8 +16,6 @@ import com.b4.simonsays.mqtt.MqttManager;
 import com.b4.simonsays.mqtt.MqttSettings;
 
 import org.eclipse.paho.client.mqttv3.MqttMessage;
-
-import java.util.Arrays;
 
 public class GameActivity extends AppCompatActivity implements MessageListener {
 

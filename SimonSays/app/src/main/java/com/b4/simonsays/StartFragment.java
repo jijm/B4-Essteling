@@ -1,6 +1,5 @@
 package com.b4.simonsays;
 
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -35,10 +34,7 @@ public class StartFragment extends Fragment implements ZXingScannerView.ResultHa
         super.onViewCreated(view, savedInstanceState);
         scannerView = view.findViewById(R.id.scannerView);
         scannerView.setVisibility(View.GONE);
-        view.findViewById(R.id.scan_button).setOnClickListener(view1 -> {
-
-            startScannerView();
-        });
+        view.findViewById(R.id.scan_button).setOnClickListener(view1 -> startScannerView());
     }
 
     private void startScannerView() {
@@ -60,14 +56,12 @@ public class StartFragment extends Fragment implements ZXingScannerView.ResultHa
         ActivityCompat.requestPermissions(getActivity(), new String[]{CAMERA}, 3);
     }
 
-
     @Override
     public void handleResult(Result result) {
         if (result.getText().equals("Shining Saphires")) {
             Toast.makeText(getContext(), result.getText(), Toast.LENGTH_SHORT).show();
             NavHostFragment.findNavController(StartFragment.this)
                     .navigate(R.id.action_StartFragment_to_WaitingFragment);
-
 
         } else {
             Toast.makeText(getContext(), "geen goede qr-code", Toast.LENGTH_SHORT).show();

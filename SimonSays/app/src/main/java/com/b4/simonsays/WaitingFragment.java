@@ -12,21 +12,16 @@ import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
 
 import com.b4.simonsays.mqtt.MessageListener;
 import com.b4.simonsays.mqtt.MqttManager;
-import com.b4.simonsays.mqtt.MqttSettings;
 
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 
 public class WaitingFragment extends Fragment implements MessageListener {
 
     @Override
-    public View onCreateView(
-            LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState
-    ) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         MqttManager.getInstance().setMessageListener(this);
 
         // Inflate the layout for this fragment
@@ -47,10 +42,9 @@ public class WaitingFragment extends Fragment implements MessageListener {
 
     @Override
     public void onMessageArrived(String topic, MqttMessage message) {
-        switch (message.toString()){
-            case "START":
-                Intent intent = new Intent(getContext(), GameActivity.class);
-                startActivity(intent);
+        if (message.toString().equals("START")) {
+            Intent intent = new Intent(getContext(), GameActivity.class);
+            startActivity(intent);
         }
     }
 }
