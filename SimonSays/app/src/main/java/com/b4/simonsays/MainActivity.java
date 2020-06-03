@@ -1,5 +1,6 @@
 package com.b4.simonsays;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -40,14 +41,14 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.action_help){
-            showHelpDialog();
+            showHelpDialog(this);
         }
 
         return super.onOptionsItemSelected(item);
     }
 
-    private void showHelpDialog() {
-        AlertDialog.Builder helpDialog = new AlertDialog.Builder(this);
+    public static void showHelpDialog(Context context) {
+        AlertDialog.Builder helpDialog = new AlertDialog.Builder(context);
         helpDialog.setTitle(R.string.dialog_help_title);
         helpDialog.setMessage(R.string.dialog_help_message);
         helpDialog.setPositiveButton(R.string.dialog_help_confirm, (dialog, which) -> dialog.dismiss());
